@@ -6,9 +6,9 @@ class Calculator::Advanced < Calculator
 
   def self.register
     super
-    Coupon.register_calculator(self)
+    #Coupon.register_calculator(self)
     ShippingMethod.register_calculator(self)
-    ShippingRate.register_calculator(self)
+    #ShippingRate.register_calculator(self)
   end
 
   def set_advanced
