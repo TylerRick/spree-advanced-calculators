@@ -8,18 +8,19 @@ module SpreeAdvancedCalculators
     
     config.autoload_paths += %W(#{config.root}/lib)
 
-    def activate
+    def self.activate
       Dir.glob(File.join(File.dirname(__FILE__), "../app/**/*_decorator*.rb")) do |c|
-          Rails.configuration.cache_classes ? require(c) : load(c)
-        end
-
-      # 
-      # [
-      #   #Calculator::PriceBucket, 
-      #   Calculator::WeightBucket, 
-      #   Calculator::QuantityBucket
-      # ].each(&:register)
+        Rails.configuration.cache_classes ? require(c) : load(c)
+      end
+      
+      [
+        #Calculator::PriceBucket, 
+        Calculator::WeightBucket, 
+        Calculator::QuantityBucket
+      ].each(&:register)
     end
+
+    config.to_prepare &method(:activate).to_proc
   end
 end
 
